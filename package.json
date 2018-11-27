@@ -1,16 +1,35 @@
 {
   "name": "fullstack_app",
   "version": "1.0.0",
-  "description": "",
+  "description": "full stack app using mongodb,express,react,and node as a template to build apps.",
   "main": "index.js",
   "scripts": {
     "now-start": "npm start",
-    "start": "concurrently \"cd backend  && node server.js \" \"cd client  &&  npm start\""
+    "start": "concurrently \"cd backend &&  node server.js   \" \"cd client  &&  npm start\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^4.0.1"
-  }
+    "concurrently": "^4.0.1",
+    "bootstrap": "^4.1.3",
+    "concurrently": "^4.0.1",
+    "mongoose": "^5.3.13",
+    "react-scripts": "1.1.5",
+    "axios": "^0.18.0",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donnyabutton/myMernApp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/donnyabutton/myMernApp/issues"
+  },
+  "homepage": "https://github.com/donnyabutton/myMernApp#readme"
 }
