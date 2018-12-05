@@ -8,17 +8,8 @@ const API_PORT = 3001;
 const app = express();
 const router = express.Router();
 
-// this is our MongoDB database
 const dbRoute = "mongodb://donnyb:1c3pmg@ds161209.mlab.com:61209/template";
-//mongodb://<dbuser>:<dbpassword>@ds163683.mlab.com:63683/friends
-//mongodb://<dbuser>:<dbpassword>@ds161209.mlab.com:61209/template
-//To connect using the mongo shell:
-// mongo ds231133.mlab.com:31133/groceries -u <dbuser> -p <dbpassword>
-// mongodb://<dbuser>:<dbpassword>@ds231133.mlab.com:31133/groceries
-
-//<dbuser>:<dbpassword>@ds231133.mlab.com:31133/groceries
-
-// connects our back end code with the database
+// const dbRoute = "mongodb://donnyb:1c3pmg@ds225624.mlab.com:25624/testing";
 mongodb: mongoose.connect(
   dbRoute,
   { useNewUrlParser: true }
@@ -28,7 +19,6 @@ let db = mongoose.connection;
 
 db.once("open", () => console.log("connected to the database"));
 
-// checks if connection with the database is successful
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // (optional) only made for logging and
@@ -36,6 +26,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
+app.use(express.static(__dirname));
 
 // this is our get method
 // this method fetches all available data in our database
@@ -50,7 +41,7 @@ router.get("/getData", (req, res) => {
 // this method overwrites existing data in our database
 router.post("/updateData", (req, res) => {
   const { id, update } = req.body;
-  Data.findOneAndUpdate(id, update, err => {
+  Data.findOneAndUpdate({ id: id }, update, err => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true });
   });
@@ -71,7 +62,7 @@ router.delete("/deleteData", (req, res) => {
 router.post("/putData", (req, res) => {
   let data = new Data();
 
-  const { id, message } = req.body;
+  const { id, message, num } = req.body;
 
   if ((!id && id !== 0) || !message) {
     return res.json({
@@ -81,6 +72,7 @@ router.post("/putData", (req, res) => {
   }
   data.message = message;
   data.id = id;
+  data.num = num;
   data.save(err => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true });
