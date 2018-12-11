@@ -1,0 +1,21 @@
+.buttons {
+  margin: 0.5em !important;
+}
+#input-container {
+  background-color: #f8f9fa;
+}
+
+li {
+  display: flex !important;
+  justify-content: space-between !important;
+  height: 100px !important;
+  align-items: baseline !important;
+}
+
+ul > li {
+  background-color: antiquewhite;
+}
+
+ul:hover > li:not(:hover) {
+  background-color: #f8f9fa;
+}
